@@ -1,0 +1,8 @@
+---
+import {Image} from 'astro:assets';
+import type {HTMLAttributes} from 'astro/types';
+import {imageSource} from '../lib/media';
+type Props=Omit<HTMLAttributes<'img'>,'src'|'alt'> & {src:string;alt:string;sizes?:string;};
+const {src,width,height,...attributes}=Astro.props;
+---
+<Image src={imageSource(src)} width={width?Number(width):undefined} height={height?Number(height):undefined} densities={[1,2]} format="webp" quality="max" {...attributes}/>

@@ -1,0 +1,8 @@
+---
+import SourceImage from '../../../components/SourceImage.astro';
+import Base from '../../../layouts/Base.astro';import Services from '../../../components/Services.astro';import Tracklist from '../../../components/Tracklist.astro';import {albums} from '../../../data/albums';import {songs} from '../../../data/songs';import {cover} from '../../../data/releases';import {albumSchema,songSchema} from '../../../lib/structured';import {formatDate} from '../../../lib/catalog';import type {Album} from '../../../data/types';
+export function getStaticPaths(){return albums.map(album=>({params:{id:album.id},props:{album}}));}
+interface Props {album:Album;}
+const {album}=Astro.props;const tracks=album.songIds.map(id=>songs.find(s=>s.id===id)!);
+---
+<Base title={`${album.title} | SRY4U`} description={`Explore ${album.title} by SRY4U. ${tracks.length} tracks, released ${formatDate(album.releaseDate)}. Listen to the EP and its individual songs.`} image={cover(album.id)} schema={[albumSchema(album),...tracks.map(songSchema)]} markdown={`/music/albums/${album.id}.md`}><section class="section fanlink-section"><a class="back-link" href="/music/">← BACK TO THE DISCOGRAPHY</a><article class="fanlink-card"><header class="fanlink-head"><SourceImage class="fanlink-art" src={cover(album.id)} alt={`${album.title} cover artwork`} width="480" height="480"/><p class="eyebrow">SRY4U / EP</p><h1>{album.title}</h1><div class="release-facts"><time datetime={album.releaseDate}>{formatDate(album.releaseDate)}</time><span>{tracks.length} TRACKS</span></div></header><Services links={album.streamingLinks}/></article><section class="album-tracklist" aria-label="EP tracks"><h2>THE TRACKS</h2><Tracklist songs={tracks}/></section></section></Base>

@@ -1,0 +1,4 @@
+---
+import {contactEmail,bookingEmail,contactPhone,webEmail} from '../data/socials';
+---
+<dl class="contact-list"><div><dt>Contact</dt><dd><a href={`mailto:${contactEmail}`}>{contactEmail}</a></dd></div><div><dt>Booking</dt><dd><a href={`mailto:${bookingEmail}`}>{bookingEmail}</a></dd></div><div><dt>Phone</dt><dd><a href={`tel:${contactPhone.replace(/[^+\d]/g,'')}`}>{contactPhone}</a></dd></div><div><dt>Web &amp; digital</dt><dd><a href={`mailto:${webEmail}`}>{webEmail}</a></dd></div></dl>

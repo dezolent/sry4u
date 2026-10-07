@@ -1,0 +1,20 @@
+name: Refresh static event snapshot
+on:
+  schedule:
+    - cron: '17 10 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger configured Netlify build hook
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -n "$NETLIFY_BUILD_HOOK" ]; then
+            curl --fail --silent --show-error --request POST "$NETLIFY_BUILD_HOOK" --output /dev/null
+          else
+            echo "No Netlify build hook configured; live events still refresh through the API."
+          fi

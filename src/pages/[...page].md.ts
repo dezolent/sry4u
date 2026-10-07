@@ -1,0 +1,3 @@
+import type {APIRoute} from 'astro';import {songs} from '../data/songs';import {albums} from '../data/albums';import {homeMarkdown,musicMarkdown,epkMarkdown,songMarkdown,albumMarkdown} from '../lib/markdown';
+export function getStaticPaths(){return [{params:{page:'index'},props:{content:homeMarkdown}},{params:{page:'music'},props:{content:musicMarkdown}},{params:{page:'epk'},props:{content:epkMarkdown}},...songs.map(s=>({params:{page:`music/${s.id}`},props:{content:songMarkdown(s)}})),...albums.map(a=>({params:{page:`music/albums/${a.id}`},props:{content:albumMarkdown(a)}}))];}
+export const GET:APIRoute=({props})=>new Response(props.content,{headers:{'Content-Type':'text/markdown; charset=utf-8'}});

@@ -1,0 +1,8 @@
+---
+import SourceImage from './SourceImage.astro';
+import {socialLinks} from '../data/socials';import {SOCIAL_ICON_URLS} from '../data/platform';
+const {class:className=''}=Astro.props;
+---
+<div class:list={['social-links',className]} aria-label="Social and streaming profiles">
+ {socialLinks.map(link=><a href={link.url} target="_blank" rel="noopener noreferrer" aria-label={`${link.name} (opens in a new tab)`} title={link.name}><SourceImage src={SOCIAL_ICON_URLS[link.icon]} alt="" width="28" loading="lazy" /></a>)}
+</div>

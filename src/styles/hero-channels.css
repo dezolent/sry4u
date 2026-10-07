@@ -1,0 +1,91 @@
+/* Channel cuts every .65s with continuous tracking movement behind the artist. */
+.hero-channel-feed { position:absolute; inset:-2%; overflow:hidden; animation:screen-drift .9s steps(5,end) infinite; }
+.hero-channel-image {
+ position:absolute; inset:-4%; width:108%; height:108%; max-width:none;
+ object-fit:cover; opacity:0; filter:saturate(.8) contrast(1.2);
+ animation:tv-channel 5.2s steps(1,end) infinite;
+ animation-delay:var(--channel-delay); will-change:transform,opacity;
+}
+.hero-channel-image:first-child { object-position:30% center; }
+.hero-channel-image:nth-child(2) { object-position:center 45%; }
+.hero-channel-image:nth-child(5) { object-position:center 35%; }
+.hero-screen-edge {
+ position:absolute; inset:0; pointer-events:none;
+ background:radial-gradient(ellipse at center,transparent 20%,#02061199 80%),linear-gradient(90deg,#05101b55,transparent 35%,transparent 65%,#05101b55);
+ box-shadow:inset 0 0 95px 25px #02050b;
+}
+.hero-world::after { opacity:.65; z-index:4; }
+.hero-ghost { opacity:.22; animation:ghost-jump 1.95s steps(1,end) infinite; }
+.hero-glow { opacity:.16; animation:breathe 4s ease-in-out infinite alternate; }
+.hero-grid { opacity:.2; }
+.hero-tracking {
+ position:absolute; inset:0; z-index:3; opacity:0; pointer-events:none;
+ background:linear-gradient(transparent 28%,#69cbff25 28%,#69cbff25 30%,#0009 30%,#0009 38%,transparent 38%,transparent 70%,#739bff30 70%,#739bff30 72%,transparent 72%);
+ animation:tv-tracking 0.65s steps(1,end) infinite;
+}
+.hero-static {
+ position:absolute; inset:-8%; z-index:3; opacity:0; pointer-events:none;
+ background:repeating-linear-gradient(0deg,#9ad8f51c 0 1px,#0005 1px 3px,transparent 3px 7px),repeating-linear-gradient(93deg,transparent 0 17px,#6996ce22 17px 19px,transparent 19px 47px);
+ animation:tv-static .24s steps(3,end) infinite;
+}
+.hero-content h1 { animation:logo-signal 5.2s steps(1,end) infinite; }
+.hero-portrait { animation:portrait-signal 5.2s steps(1,end) infinite; }
+.hero-channel { min-width:230px; height:16px; }
+.hero-channel-label { position:absolute; left:0; bottom:0; white-space:nowrap; opacity:0; animation:channel-label 5.2s steps(1,end) infinite; animation-delay:var(--channel-delay); }
+.motion-paused .hero *, .motion-paused .hero *::before, .motion-paused .hero *::after { animation-play-state:paused!important; }
+@keyframes tv-channel {
+ 0% { opacity:.52; transform:translate(3%,-2%) scale(1.12) skewX(-6deg); }
+ 2% { opacity:.52; transform:translate(-2%,1%) scale(1.08) skewX(3deg); }
+ 4% { opacity:.52; transform:translate(1%,0) scale(1.05); }
+ 6% { opacity:.52; transform:translate(-3%,-1%) scale(1.1) skewX(-2deg); }
+ 8% { opacity:.52; transform:translate(2%,1%) scale(1.08) skewX(4deg); }
+ 10% { opacity:.52; transform:translate(-1%,0) scale(1.12); }
+ 12.5%,100% { opacity:0; transform:scale(1.05); }
+}
+@keyframes screen-drift {
+ 0%,100% {transform:translate(-6px,2px);}
+ 25% {transform:translate(8px,-3px);}
+ 50% {transform:translate(-10px,1px);}
+ 75% {transform:translate(4px,4px);}
+}
+@keyframes channel-label { 0%,12.49% {opacity:1;} 12.5%,100% {opacity:0;} }
+@keyframes tv-tracking {
+ 0% {opacity:.7;transform:translateY(-25%) skewX(-12deg);}
+ 20% {opacity:.7;transform:translateY(18%) skewX(10deg);}
+ 40% {opacity:.7;transform:translateY(-8%) skewX(-5deg);}
+ 60% {opacity:.7;transform:translateY(30%) skewX(7deg);}
+ 80%,100% {opacity:.7;transform:translateY(-18%) skewX(-9deg);}
+}
+@keyframes tv-static {
+ 0%,100% {opacity:.3;transform:translate(2%,1%);}
+ 50% {opacity:.3;transform:translate(-2%,-1%);}
+}
+.hero-tracking::after {
+ content:'';position:absolute;left:0;right:0;top:-30%;height:28%;
+ background:linear-gradient(transparent,#609be522 25%,#02050b88 55%,transparent);
+ animation:tracking-roll 1.7s linear infinite;
+}
+@keyframes tracking-roll {to {transform:translateY(500%);}}
+@keyframes logo-signal {
+ 0%,3%,50%,53%,100% {transform:none;filter:drop-shadow(0 6px 24px #000);}
+ 1.5%,51.5% {transform:translateX(-5px) skewX(-2deg);filter:drop-shadow(4px 0 0 #30d5ff70) drop-shadow(-4px 0 0 #a24cff70);}
+}
+@keyframes portrait-signal {
+ 0%,3%,100% {transform:translateX(-50%);}
+ 1.5% {transform:translateX(calc(-50% + 6px)) skewX(1deg);}
+}
+@keyframes ghost-jump {
+ 0%,100% {transform:rotate(8deg) translate(0,0);}
+ 25% {transform:rotate(4deg) translate(-4%,2%);}
+ 50% {transform:rotate(10deg) translate(3%,-2%);}
+ 75% {transform:rotate(6deg) translate(-2%,3%);}
+}
+@media(prefers-reduced-motion:reduce) {
+ .hero-channel-image {opacity:0;animation:none!important;transform:none;}
+ .hero-channel-image:first-child {opacity:.46;}
+ .hero-channel-label {opacity:0;animation:none!important;}
+ .hero-channel-label:first-child {opacity:1;}
+ .hero-static,.hero-tracking {display:none;}
+ .hero-channel-feed {animation:none!important;transform:none;}
+ .hero-content h1,.hero-portrait,.hero-ghost {animation:none!important;}
+}

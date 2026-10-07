@@ -1,0 +1,5 @@
+---
+import SourceImage from './SourceImage.astro';
+import {biography} from '../data/artist';import {site} from '../data/site';import Contact from './Contact.astro';
+---
+<section class="section about" id="about"><div><p class="eyebrow">05 / THE ARTIST</p><h2>BUILT ON<br/><em>CONTRAST.</em></h2><div class="body-copy">{biography.map(p=><p>{p}</p>)}</div><Contact/><a class="text-link" href="/epk/">Explore the full press kit <span aria-hidden="true">↗</span></a></div><figure class="about-portrait"><SourceImage src="/images/brand/profile/sry4u-profile-front-shot.jpg" sizes="(max-width: 800px) 90vw, 45vw" alt="SRY4U standing with his arms folded" width="960" height="1440" loading="lazy"/><SourceImage class="portrait-logo" src={site.chromeLogo} alt="" width="864" height="330" loading="lazy"/><figcaption>SRY4U / DENVER, COLORADO</figcaption></figure></section>

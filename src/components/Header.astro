@@ -1,0 +1,13 @@
+---
+import SourceImage from './SourceImage.astro';
+import {canonicalPagePath} from '../lib/routing';
+import {site} from '../data/site';import Socials from './Socials.astro';
+const path=canonicalPagePath(Astro.url.pathname);const links=[['Home','/'],['Music','/music/'],['EPK','/epk/']];
+---
+<header class="site-header">
+ <nav class="desktop-nav" aria-label="Main navigation">{links.map(([name,url])=><a href={url} aria-current={(url==='/'?path==='/':path.startsWith(url))?'page':undefined}>{name}</a>)}</nav>
+ <details class="mobile-menu"><summary aria-label="Open navigation"><span class="menu-bars" aria-hidden="true">☰</span><span>Menu</span></summary><nav aria-label="Mobile navigation">{links.map(([name,url])=><a href={url} aria-current={(url==='/'?path==='/':path.startsWith(url))?'page':undefined}>{name}</a>)}<Socials /></nav></details>
+ <a class="header-logo" href="/" aria-label="SRY4U home"><SourceImage src={site.logo} alt="SRY4U" width="160" /></a>
+ <Socials class="header-socials" />
+ <a class="mobile-listen" href="/music/">Listen</a>
+</header>

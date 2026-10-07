@@ -1,0 +1,7 @@
+---
+import SourceImage from './SourceImage.astro';
+import type {Song} from '../data/types';import {cover} from '../data/releases';
+interface Props {songs:Song[];newTab?:boolean;}
+const {songs,newTab=false}=Astro.props;
+---
+<div class="tracklist"><div class="track-heading" aria-hidden="true"><span>#</span><span></span><span>RELEASE / ARTIST</span><span>GENRE</span><span>TIME</span></div><ol>{songs.map((song,i)=><li><a class="track-row" href={`/music/${song.id}/`} target={newTab?'_blank':undefined} rel={newTab?'noopener noreferrer':undefined} aria-label={`${song.title}${newTab?' (opens in a new tab)':''}`} data-track="release_open"><span class="track-number" aria-hidden="true">{String(i+1).padStart(2,'0')}</span><SourceImage src={cover(song.id)} alt="" width="56" height="56" loading="lazy"/><span class="track-name"><strong>{song.title}</strong><small>{song.artist||'SRY4U'}{song.collaborators?.length?` · ${song.collaborators.join(', ')}`:''}</small></span><span class="track-genre">{song.genres.join(' / ')||'—'}</span><span class="track-duration">{song.duration}<span class="track-open" aria-hidden="true">↗</span></span></a></li>)}</ol></div>

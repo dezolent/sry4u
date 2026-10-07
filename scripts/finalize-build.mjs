@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';import path from 'node:path';import crypto from 'node:crypto';
+const dist='dist';
+async function walk(dir){return(await Promise.all((await fs.readdir(dir,{withFileTypes:true})).map(async e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]))).flat();}
+const files=await walk(dist);const hashes=new Set();
+for(const file of files.filter(f=>f.endsWith('.html'))){const html=await fs.readFile(file,'utf8');for(const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)){if(!/\bsrc=|type=["']application\/(?:ld\+)?json["']/.test(match[1])&&match[2])hashes.add(`'sha256-${crypto.createHash('sha256').update(match[2]).digest('base64')}'`);}}
+const csp=`default-src 'self'; script-src 'self' ${[...hashes].join(' ')} https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; font-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests`;
+await fs.writeFile(`${dist}/_headers`,`/*\n  Content-Security-Policy: ${csp}\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()\n  X-Frame-Options: DENY\n  Strict-Transport-Security: max-age=31536000; includeSubDomains\n\n/_astro/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/*.md\n  Content-Type: text/markdown; charset=utf-8\n\n/music/*.md\n  Content-Type: text/markdown; charset=utf-8\n\n/music/albums/*.md\n  Content-Type: text/markdown; charset=utf-8\n`);
+// Retain original image URLs for sharing/press downloads; omit unused large videos.
+for(const folder of ['images/videos'])await fs.rm(path.join(dist,folder),{recursive:true,force:true});
+console.log(`Generated security headers for ${files.filter(f=>f.endsWith('.html')).length} HTML pages.`);

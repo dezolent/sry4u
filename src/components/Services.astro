@@ -1,0 +1,7 @@
+---
+import SourceImage from './SourceImage.astro';
+import type {StreamingLink} from '../data/types';import {PLATFORM_LOGOS} from '../data/platform';import {safePublicUrl} from '../lib/events';
+interface Props {links?:StreamingLink[];}
+const {links=[]}=Astro.props;
+---
+<div class="service-list">{links.filter(link=>safePublicUrl(link.url)).map(link=><a class="service-link" href={safePublicUrl(link.url)} target="_blank" rel="noopener noreferrer" aria-label={`Listen on ${link.platform} (opens in a new tab)`} data-track="streaming_open">{PLATFORM_LOGOS[link.platform]?<SourceImage src={PLATFORM_LOGOS[link.platform].src} alt={PLATFORM_LOGOS[link.platform].alt} width="180" loading="lazy"/>:<span class="service-name">{link.platform}</span>}<span class="service-label">Listen <span aria-hidden="true">↗</span></span></a>)}</div>
