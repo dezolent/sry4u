@@ -10,3 +10,6 @@ dist/
 playwright-report/
 test-results/
 .superpowers/
+
+# Large promo video is unused by the site and exceeds GitHub’s Git file limit.
+public/images/videos/sry4u-promo-edit-video.mp4
