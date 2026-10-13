@@ -1,11 +1,19 @@
 import fs from 'node:fs/promises';import path from 'node:path';import assert from 'node:assert/strict';import crypto from 'node:crypto';import {songs} from '../src/data/songs.ts';import {albums} from '../src/data/albums.ts';
 await assert.rejects(fs.access('public/images/optimized'),{code:'ENOENT'});
 const root='dist';const sitemap=await fs.readFile(`${root}/sitemap-0.xml`,'utf8');const headers=await fs.readFile(`${root}/_headers`,'utf8');
+function verifySharingImage(html,route){
+ const image='https://sry4u.com/images/og-sry4u.jpg';
+ assert.ok(html.includes(`property="og:image" content="${image}"`),`Default OG image: ${route}`);
+ assert.ok(html.includes(`name="twitter:image" content="${image}"`),`Default Twitter image: ${route}`);
+ assert.equal([...html.matchAll(/property="og:image"/g)].length,1,`Single OG image: ${route}`);
+ for(const [property,value] of [['type','image/jpeg'],['width','1200'],['height','630']])assert.ok(html.includes(`property="og:image:${property}" content="${value}"`),`OG image ${property}: ${route}`);
+}
+await fs.access(`${root}/images/og-sry4u.jpg`);
 async function verifyPage(route,title){
  const file=route==='/'?'index.html':`${route.replace(/^\//,'')}index.html`;const html=await fs.readFile(path.join(root,file),'utf8');
  assert.ok(html.includes('<title>')&&html.includes(title),`Title: ${route}`);
  assert.ok(html.includes(`href="https://sry4u.com${route}"`),`Canonical: ${route}`);
- assert.ok(html.includes('property="og:image"'),`Sharing card: ${route}`);
+ verifySharingImage(html,route);
  assert.ok(!html.includes('/images/optimized/'),`Obsolete image path: ${route}`);
  assert.ok(html.includes('src="/_astro/'),`Astro image output: ${route}`);
  for(const [_,attrs,body]of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)){
@@ -22,6 +30,7 @@ for(const song of songs){const html=await verifyPage(`/music/${song.id}/`,'SRY4U
 for(const album of albums){await verifyPage(`/music/albums/${album.id}/`,'SRY4U');await fs.access(`${root}/music/albums/${album.id}.md`);for(const id of album.songIds)assert.ok(songs.some(s=>s.id===id));}
 for(const name of ['index.md','music.md','epk.md','robots.txt','llms.txt','404.html'])await fs.access(`${root}/${name}`);
 assert.ok(!(await fs.readFile(`${root}/404.html`,'utf8')).includes('name="robots" content="index'));
+verifySharingImage(await fs.readFile(`${root}/404.html`,'utf8'),'/404/');
 assert.ok(!sitemap.includes('404'));assert.ok(!sitemap.includes('/api/'));assert.ok(!sitemap.includes('.md'));
 // Match secret values without ever printing them or the matching file contents.
 try{

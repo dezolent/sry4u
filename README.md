@@ -51,6 +51,23 @@ Set a valid `PUBLIC_GA_MEASUREMENT_ID` (G-…) to enable optional GA4. Visitors 
 
 The site has keyboard navigation, visible focus, a skip link, reduced-motion support, a hero pause button, native modal focus trapping/restoration, and a filterable catalog that remains fully readable without JavaScript.
 
-Canonical metadata, release-specific sharing images, JSON-LD, sitemap, robots.txt, llms.txt, and Markdown versions share the same content sources. Text routes: `/index.md`, `/music.md`, `/epk.md`, `/music/{id}.md`, and `/music/albums/{id}.md`. Static event structured data is a build snapshot; runtime updates keep the visible event list and its JSON-LD together. Search visibility is not guaranteed by these features.
+Canonical metadata, the default SRY4U sharing image, JSON-LD, sitemap, robots.txt, llms.txt, and Markdown versions share the same content sources. Text routes: `/index.md`, `/music.md`, `/epk.md`, `/music/{id}.md`, and `/music/albums/{id}.md`. Static event structured data is a build snapshot; runtime updates keep the visible event list and its JSON-LD together. Search visibility is not guaranteed by these features.
+
+Every page uses `/images/og-sry4u.jpg` for Open Graph and Twitter previews by default, including song and album fanlinks. To override a particular page, pass `image` to its `Base` layout; optionally set `imageAlt`, `imageWidth`, `imageHeight`, and `imageType` for that artwork:
+
+```astro
+<Base
+  title="Special release | SRY4U"
+  image="/images/special-release-card.jpg"
+  imageAlt="SRY4U special release artwork"
+  imageWidth={1200}
+  imageHeight={630}
+  imageType="image/jpeg"
+>
+  <!-- Page content -->
+</Base>
+```
+
+Sharing image URLs are absolute and appear in the initial HTML so preview crawlers can read them without JavaScript. Publish a new deployment after changing this metadata; messaging services may retain previews they already cached.
 
 `scripts/finalize-build.mjs` generates Netlify security headers with hashes of emitted inline scripts. The policy permits the selected optional analytics origins, same-origin assets/API, and no arbitrary frames. Validate headers on the deployed URL after connection.
