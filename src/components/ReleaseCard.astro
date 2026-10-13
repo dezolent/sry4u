@@ -1,0 +1,18 @@
+---
+import SourceImage from './SourceImage.astro';
+import {cover} from '../data/releases';
+import type {releases} from '../data/releases';
+import {formatDate} from '../lib/catalog';
+
+interface Props {release:(typeof releases)[number];filterable?:boolean;}
+const {release:r,filterable=false}=Astro.props;
+---
+<article class="release-card" data-id={filterable?r.id:undefined} data-release={filterable?JSON.stringify(r):undefined}>
+  <a class="art-link" href={r.href} aria-label={`Listen to ${r.title}`} data-track="release_open">
+    <SourceImage src={cover(r.id)} sizes="(max-width: 800px) 43vw, (max-width: 1100px) 30vw, 280px" alt={`${r.title} cover artwork`} width="480" height="480" loading="lazy"/>
+    <span class="release-category">{r.category==='ep'?'EP':r.category==='mix'?'DJ MIX':'TRACK / FLIP'}</span>
+  </a>
+  <h3><a href={r.href}>{r.title}</a></h3>
+  <p>{r.artist||'SRY4U'}{'collaborators' in r&&r.collaborators?.length?` · ${r.collaborators.join(', ')}`:''}</p>
+  <p class="release-date"><time datetime={r.releaseDate}>{formatDate(r.releaseDate)}</time><span>{r.duration}</span></p>
+</article>

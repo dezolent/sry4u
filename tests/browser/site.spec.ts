@@ -1,15 +1,24 @@
 import {test,expect} from '@playwright/test';import AxeBuilder from '@axe-core/playwright';
+import {songs as catalogSongs} from '../../src/data/songs';
+import {albums} from '../../src/data/albums';
 test('home has ten real fanlinks, all eight photos, and no horizontal overflow',async({page})=>{
  await page.goto('/');await expect(page.getByRole('heading',{level:1})).toContainText('SRY4U');
  await expect(page.locator('#featured .track-row')).toHaveCount(10);await expect(page.locator('[data-gallery-index]')).toHaveCount(8);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
  await expect(page.locator('#featured .track-row').first()).toHaveAttribute('target','_blank');
 });
-test('search, category and URL state reset without hiding catalog for no-JS visitors',async({page})=>{
- await page.goto('/music/?q=Yuna');await expect(page.locator('.release-card:visible')).toHaveCount(1);
- await page.getByLabel('Search releases').fill('nothingmatches');await expect(page.getByRole('heading',{name:'No signal found.'})).toBeVisible();
- await page.getByRole('button',{name:'Clear filters',exact:true}).click();await expect(page.locator('.release-card:visible')).toHaveCount(22);
- await page.getByLabel('Release type').selectOption('mix');await expect(page.locator('.release-card:visible')).toHaveCount(1);expect(page.url()).toContain('category=mix');
+test('EPs stay above the song list while song search, category and URL state reset',async({page})=>{
+ await page.goto('/music/?q=Yuna');
+ const eps=page.locator('#ep-releases .release-card:visible');const songs=page.locator('#song-releases .release-card:visible');
+ await expect(eps).toHaveCount(albums.length);await expect(songs).toHaveCount(1);
+ expect(await page.locator('#ep-releases').evaluate(el=>Boolean(el.compareDocumentPosition(document.querySelector('#song-releases')!)&Node.DOCUMENT_POSITION_FOLLOWING))).toBeTruthy();
+ await expect(page.getByLabel('Release type').locator('option[value="ep"]')).toHaveCount(0);
+ await page.getByLabel('Search songs').fill('nothingmatches');await expect(page.getByRole('heading',{name:'No signal found.'})).toBeVisible();await expect(eps).toHaveCount(albums.length);
+ await expect(page.locator('#release-count')).toHaveText('0 songs');
+ await page.getByRole('button',{name:'Clear filters',exact:true}).click();await expect(songs).toHaveCount(catalogSongs.length);await expect(eps).toHaveCount(albums.length);
+ await page.getByLabel('Release type').selectOption('mix');await expect(songs).toHaveCount(1);expect(page.url()).toContain('category=mix');await expect(eps).toHaveCount(albums.length);
+ await page.reload();await expect(songs).toHaveCount(1);await expect(eps).toHaveCount(albums.length);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBeTruthy();
 });
 test('gallery supports next, Escape and restores focus',async({page})=>{
  await page.goto('/');const opener=page.locator('[data-gallery-index="0"]');await opener.click();await expect(page.locator('#gallery-dialog')).toBeVisible();
@@ -47,7 +56,7 @@ test('analytics only loads after consent and queues valid gtag commands',async({
 
 test('navigation and the full catalog remain usable without JavaScript',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();
- await page.goto('http://127.0.0.1:4321/music/');await expect(page.locator('.release-card')).toHaveCount(22);
+ await page.goto('http://127.0.0.1:4321/music/');await expect(page.locator('.release-card')).toHaveCount(catalogSongs.length+albums.length);
  await page.locator('.mobile-menu summary').click();await page.locator('.mobile-menu').getByRole('link',{name:'EPK',exact:true}).click();
  await expect(page.getByRole('link',{name:/Download EPK/})).toBeVisible();await context.close();
 });

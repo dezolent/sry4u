@@ -3,10 +3,31 @@ import type { Song } from "./types";
 /** Public catalog checked 2026-10-06 (America/New_York). See SOURCES.md. */
 export const songs: Song[] = [
   {
+    "id": "dmx-x-gone-give-it-to-ya-sry4-x-mvtr-flip",
+    "title": "DMX - X Gone Give It To Ya (SRY4U x MVTR FLIP)",
+    "releaseDate": "2026-10-12",
+    "coverArt": "https://i1.sndcdn.com/artworks-zi2NIvkXr3nEuNVt-Ahn14w-t500x500.jpg",
+    "genres": [
+      "Dubstep"
+    ],
+    "duration": "2:42",
+    "artist": "DMX",
+    "collaborators": [
+      "SRY4U",
+      "MVTR"
+    ],
+    "streamingLinks": [
+      {
+        "platform": "SoundCloud",
+        "url": "https://soundcloud.com/sry4u/dmx-x-gone-give-it-to-ya-sry4u"
+      }
+    ],
+  },
+  {
     "id": "adventure-club-yuna-gold-sry4u-flip",
     "title": "Adventure Club & Yuna - Gold (SRY4U FLIP)",
     "releaseDate": "2026-09-15",
-    "coverArt": "https://i1.sndcdn.com/artworks-mIavcRI2BqacK3z0-F6M3Xw-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-mIavcRI2BqacK3z0-F6M3Xw-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -28,7 +49,7 @@ export const songs: Song[] = [
     "id": "paramore-all-i-wanted-sry4u-flip",
     "title": "Paramore - All I Wanted (SRY4U FLIP)",
     "releaseDate": "2026-09-01",
-    "coverArt": "https://i1.sndcdn.com/artworks-mIavcRI2BqacK3z0-F6M3Xw-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-mIavcRI2BqacK3z0-F6M3Xw-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -49,7 +70,7 @@ export const songs: Song[] = [
     "id": "john-summit-chainsmokers-all-the-time-sry4u-x-bonkers-flip",
     "title": "John Summit & Chainsmokers - All The Time (SRY4U X BONKERS FLIP)",
     "releaseDate": "2026-08-18",
-    "coverArt": "https://i1.sndcdn.com/artworks-mIavcRI2BqacK3z0-F6M3Xw-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-mIavcRI2BqacK3z0-F6M3Xw-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -72,7 +93,7 @@ export const songs: Song[] = [
     "id": "schoolboy-q-that-part-xotix-x-sry4u-flip",
     "title": "SCHOOLBOY Q- THAT PART (XOTIX x SRY4U FLIP)",
     "releaseDate": "2026-07-02",
-    "coverArt": "https://i1.sndcdn.com/artworks-zMCzWUiHmLee8FZV-vqVepg-large.png",
+    "coverArt": "https://i1.sndcdn.com/artworks-zMCzWUiHmLee8FZV-vqVepg-t500x500.png",
     "genres": [
       "Wook trap"
     ],
@@ -94,7 +115,7 @@ export const songs: Song[] = [
     "id": "london-grammar-missing-ridence-x-sry4u-remix",
     "title": "London Grammar - Missing (Ridence x SRY4U Remix)",
     "releaseDate": "2026-06-26",
-    "coverArt": "https://i1.sndcdn.com/artworks-NVcysiSr3NOcpNK0-cI1snQ-large.png",
+    "coverArt": "https://i1.sndcdn.com/artworks-NVcysiSr3NOcpNK0-cI1snQ-t500x500.png",
     "genres": [
       "Dubstep"
     ],
@@ -116,7 +137,7 @@ export const songs: Song[] = [
     "id": "atonement-session-vol-1",
     "title": "ATONEMENT SESSION VOL. 1",
     "releaseDate": "2026-06-17",
-    "coverArt": "https://i1.sndcdn.com/artworks-plfvyYg1zB1GXWq6-sz6JUA-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-plfvyYg1zB1GXWq6-sz6JUA-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -133,7 +154,7 @@ export const songs: Song[] = [
     "id": "tay-k-m-she-wrote-sry4u-flip",
     "title": "Tay K - M.... She Wrote (SRY4U FLIP)",
     "releaseDate": "2026-06-05",
-    "coverArt": "https://i1.sndcdn.com/artworks-90Vs3Y1ygSybrSYt-fyzk5g-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-90Vs3Y1ygSybrSYt-fyzk5g-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -154,7 +175,7 @@ export const songs: Song[] = [
     "id": "breathe-carolina-blackout-sry4u-flip",
     "title": "Breathe Carolina - Blackout (SRY4U FLIP)",
     "releaseDate": "2026-05-09",
-    "coverArt": "https://i1.sndcdn.com/artworks-90Vs3Y1ygSybrSYt-fyzk5g-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-90Vs3Y1ygSybrSYt-fyzk5g-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -175,7 +196,7 @@ export const songs: Song[] = [
     "id": "zeds-dead-lost-you-sry4u-x-sin-gartner-flip",
     "title": "Zeds Dead - Lost You (SRY4U X SIN GARTNER FLIP)",
     "releaseDate": "2026-04-23",
-    "coverArt": "https://i1.sndcdn.com/artworks-NBQaQnluoqYYUzGz-3zTzzQ-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-NBQaQnluoqYYUzGz-3zTzzQ-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -219,7 +240,7 @@ export const songs: Song[] = [
     "id": "subtronics-itchy-scratchy-sry4u-flip-2-5k-free-dl",
     "title": "SUBTRONICS - ITCHY SCRATCHY (SRY4U FLIP) (2.5K FREE DL)",
     "releaseDate": "2026-03-25",
-    "coverArt": "https://i1.sndcdn.com/artworks-2pldHAklIgcgfkwG-cYIVEw-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-2pldHAklIgcgfkwG-cYIVEw-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -240,7 +261,7 @@ export const songs: Song[] = [
     "id": "zeds-dead-jauz-sos-sry4u-flip",
     "title": "ZEDS DEAD & JAUZ - SOS (SRY4U FLIP)",
     "releaseDate": "2026-03-06",
-    "coverArt": "https://i1.sndcdn.com/artworks-TR2ebi0iCJzOwCbH-bT1dIA-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-TR2ebi0iCJzOwCbH-bT1dIA-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -262,7 +283,7 @@ export const songs: Song[] = [
     "id": "smoked-my-brain-away",
     "title": "Smoked My Brain Away",
     "releaseDate": "2026-02-19",
-    "coverArt": "https://i1.sndcdn.com/artworks-JL6lxrMdTgxce7sP-0GBUeA-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-JL6lxrMdTgxce7sP-0GBUeA-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -280,7 +301,7 @@ export const songs: Song[] = [
     "id": "nate-band-side-to-side-sry4u-flip",
     "title": "Nate Band - Side to Side (SRY4U FLIP)",
     "releaseDate": "2026-01-08",
-    "coverArt": "https://i1.sndcdn.com/artworks-2pldHAklIgcgfkwG-cYIVEw-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-2pldHAklIgcgfkwG-cYIVEw-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],
@@ -411,7 +432,7 @@ export const songs: Song[] = [
     "id": "lil-plimpton-stone-face-sry4u-vip",
     "title": "LIL PLIMPTON - STONE FACE (SRY4U VIP)",
     "releaseDate": "2024-10-09",
-    "coverArt": "https://i1.sndcdn.com/artworks-zi2NIvkXr3nEuNVt-Ahn14w-large.jpg",
+    "coverArt": "https://i1.sndcdn.com/artworks-zi2NIvkXr3nEuNVt-Ahn14w-t500x500.jpg",
     "genres": [
       "Dubstep"
     ],

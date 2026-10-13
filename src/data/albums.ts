@@ -11,6 +11,7 @@ export const albums: Album[] = [
       "john-summit-chainsmokers-all-the-time-sry4u-x-bonkers-flip",
       "paramore-all-i-wanted-sry4u-flip",
       "adventure-club-yuna-gold-sry4u-flip",
+      "dmx-x-gone-give-it-to-ya-sry4-x-mvtr-flip",
       "breathe-carolina-blackout-sry4u-flip",
       "tay-k-m-she-wrote-sry4u-flip",
       "zeds-dead-lost-you-sry4u-x-sin-gartner-flip"
