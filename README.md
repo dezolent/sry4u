@@ -6,7 +6,7 @@ Astro static pages, small native browser enhancements, and one Netlify serverles
 
 Use Node 22.12 or later. Run `npm ci`, copy `.env.example` to `.env` if you do not already have one, and set `BANDSINTOWN_API_KEY` locally. Never commit `.env`.
 
-- `npm run dev` — local site at http://127.0.0.1:4321
+- `npm run dev` — local site at http://localhost:4321
 - `npm test` — event handling and catalog contracts
 - `npm run check` — Astro/TypeScript verification
 - `npm run build` — production pages, sitemap and security headers
@@ -24,6 +24,20 @@ All displayed source images live in `public/images/`: brand artwork, gallery pho
 There is no manually maintained variant directory or resizing script. Astro owns its image cache and generated `dist/_astro/` output. Keep one source file per image; do not edit generated output. The existing transparent hero cutout is `public/images/brand/profile/sry4u-profile-main-cutout.png`; logos use the supplied original PNGs. The favicon and social sharing card are dedicated public artwork. Large unused videos are excluded from deployment; original image URLs and the EPK are retained.
 
 Set `PUBLIC_MERCH_URL` to the real official store URL. Until configured, the homepage offers a merchandise enquiry email, with no invented products or checkout.
+
+## Video archive
+
+The music and video catalog headings share `src/components/SignalHeading.astro`: a short entrance, chromatic slice glitches and a light sweep that finish automatically. Reduced-motion visitors get static text. `src/components/FanlinkBackdrop.astro` wraps song and EP content with blurred local cover artwork outside the crisp fanlink card.
+
+Cross-platform recording links are stored with each song in `src/data/songs.ts`; the source audit and unresolved matches are in `src/data/STREAMING-SOURCES.md`. Only confirmed recording destinations are added. A platform's absent link means it was not confirmed, rather than proving the song is unavailable there. Services, JSON-LD and Markdown all consume the same links. Supplied black-lettered platform wordmarks use a light backing for legibility on the dark cards while preserving their original colors.
+
+`/videos/` lists the four official channel uploads. Each `/videos/{id}/` watch page has a prominent YouTube privacy-enhanced embed and a `VideoObject` linked as the page's main entity. The index uses `CollectionPage` and an ordered `ItemList`. The pages also appear in the sitemap and have Markdown counterparts.
+
+Edit `src/data/videos.ts` for video metadata and set lists. Keep verified upload timestamps (including timezone), durations, titles, and YouTube IDs together. Original YouTube thumbnails live in `public/images/video-thumbnails/`; Astro generates display sizes. Spoken captions for the two tour diaries live in `src/data/video-transcripts.ts` and render in native, initially collapsed disclosures. They are automatic captions, may contain errors, and omit music/lyric passages. Session 1.1 has the artist-supplied full tracklist; no verified Fox Theatre tracklist was found. Sources and verification notes are in `src/data/VIDEO-SOURCES.md`.
+
+For local playback, open `http://localhost:4321/videos/`. YouTube rejected these embedded videos when the referring page used the numeric loopback host `127.0.0.1`; the same iframe played from `localhost`. Both development and production preview commands use `localhost`. To check actual playback from YouTube (requires internet), run `YOUTUBE_PLAYBACK_SMOKE=1 npx playwright test tests/browser/video-playback.spec.ts --project=desktop`. The ordinary browser suite skips this external-service smoke check; it verifies the site independently of YouTube availability.
+
+After deployment, use Google's Rich Results Test and Search Console URL Inspection on the watch pages. Valid markup supports video discovery and eligibility; Google decides whether to index a page or display rich results.
 
 ## Page URLs
 

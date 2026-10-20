@@ -1,0 +1,49 @@
+---
+import SourceImage from './SourceImage.astro';
+
+interface Props {artwork:string;}
+const {artwork}=Astro.props;
+---
+
+<div class="fanlink-backdrop">
+  <div class="fanlink-backdrop-visual" aria-hidden="true">
+    <SourceImage src={artwork} alt="" width="960" height="960" loading="eager" fetchpriority="low"/>
+  </div>
+  <slot/>
+</div>
+
+<style>
+  .fanlink-backdrop {
+    position:relative;
+    isolation:isolate;
+    overflow:hidden;
+    background:#080a10;
+  }
+
+  .fanlink-backdrop-visual {
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    overflow:hidden;
+    pointer-events:none;
+  }
+
+  .fanlink-backdrop-visual :global(img) {
+    position:absolute;
+    inset:-72px;
+    width:calc(100% + 144px);
+    max-width:none;
+    height:calc(100% + 144px);
+    object-fit:cover;
+    filter:blur(48px) saturate(1.15);
+    transform:scale(1.06);
+    opacity:.75;
+  }
+
+  .fanlink-backdrop-visual::after {
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,#080a1070 0%,#080a1090 50%,#080a10e8 100%);
+  }
+</style>

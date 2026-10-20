@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import SignalHeading from '../../components/SignalHeading.astro';
+import VideoCard from '../../components/VideoCard.astro';
+import {videos} from '../../data/videos';
+import {videoCollection,videoSchema} from '../../lib/videos';
+---
+<Base title="Videos | SRY4U" description="Watch SRY4U’s Atonement DJ sets and tour diaries, with full videos, set lists, and spoken transcripts where available." pageType="CollectionPage" mainEntity={videoCollection} schema={videos.map(videoSchema)} markdown="/videos.md">
+ <section class="section page-intro">
+  <p class="eyebrow">THE VISUAL ARCHIVE / SRY4U</p>
+  <SignalHeading top="VIDEOS." bottom="FEEL IT LIVE."/>
+  <p>From the living room to the stage. Full sets and life between the shows.</p>
+ </section>
+ <section class="section videos-content" aria-label="All SRY4U videos">
+  <div class="results-info"><span>{videos.length} VIDEOS</span><span>SETS &amp; TOUR DIARIES / NEWEST FIRST</span></div>
+  <div class="video-grid">{videos.map((video,index)=><VideoCard video={video} index={index}/>)}</div>
+  <a class="text-link channel-link" href="https://www.youtube.com/@SRY4U_MUSIC/videos" target="_blank" rel="noopener noreferrer">SRY4U ON YOUTUBE ↗</a>
+ </section>
+</Base>
+<style>
+ .videos-content{padding-top:0}.video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 30px}.channel-link{display:inline-block;margin-top:45px}
+ @media(max-width:700px){.video-grid{grid-template-columns:1fr;gap:35px}.results-info>span:last-child{display:none}}
+</style>

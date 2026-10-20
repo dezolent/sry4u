@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SignalHeading from '../../components/SignalHeading.astro';
 import ReleaseCard from '../../components/ReleaseCard.astro';
 import {releases,sortedSongs} from '../../data/releases';
 import {albums} from '../../data/albums';
@@ -14,7 +15,7 @@ const schema=[...sortedSongs.map(songSchema),...albums.map(albumSchema),{'@type'
 <Base title="Music & Discography | SRY4U" description="Explore every SRY4U release, remix, EP, and Atonement mix. Search the catalog and find links to listen on Spotify, SoundCloud, and more." markdown="/music.md" schema={schema}>
   <section class="section page-intro">
     <p class="eyebrow">THE CATALOG / SRY4U</p>
-    <h1>FEEL<br/><em>EVERYTHING.</em></h1>
+    <SignalHeading top="FEEL" bottom="EVERYTHING."/>
     <p>Originals, flips, and confessions. Find your frequency.</p>
   </section>
   {eps.length>0&&<section id="ep-releases" class="section ep-section" aria-labelledby="ep-heading">

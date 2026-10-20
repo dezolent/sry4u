@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import {videos,videoEmbed,videoPath,youtubeUrl} from '../../data/videos';
+import type {Video} from '../../data/videos';
+import {videoSchema} from '../../lib/videos';
+import {absolute} from '../../lib/structured';
+import {formatDate} from '../../lib/catalog';
+export function getStaticPaths(){return videos.map(video=>({params:{id:video.id},props:{video}}));}
+interface Props {video:Video;}
+const {video}=Astro.props;
+const timestamp=(start:number)=>`${Math.floor(start/60)}:${String(start%60).padStart(2,'0')}`;
+---
+<Base title={`${video.title} | SRY4U`} description={video.description} pageType="ItemPage" mainEntity={{'@id':absolute(`${videoPath(video)}#video`)}} schema={[videoSchema(video)]} markdown={`/videos/${video.id}.md`}>
+ <article class="section watch-page">
+  <a class="back-link" href="/videos/">← ALL VIDEOS</a>
+  <header class="watch-heading">
+   <p class="eyebrow">SRY4U / {video.kind.toUpperCase()}</p>
+   <h1>{video.title}</h1>
+  </header>
+  <div class="video-player">
+   <iframe src={videoEmbed(video)} title={`Watch ${video.title}`} width="1280" height="720" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <div class="watch-facts"><time datetime={video.uploadDate}>UPLOADED {formatDate(video.uploadDate.slice(0,10))}</time><span>{video.duration}</span><a href={youtubeUrl(video)} target="_blank" rel="noopener noreferrer">WATCH ON YOUTUBE ↗</a></div>
+  <p class="watch-description">{video.description}</p>
+  {video.setlist&&<section class="video-notes" aria-labelledby="setlist-heading">
+   <div class="section-heading"><h2 id="setlist-heading">THE SET LIST</h2><p class="section-note">{video.setlist.length} ENTRIES / IN PLAY ORDER</p></div>
+   <p class="notes-intro">Full tracklist supplied by SRY4U. Edits, doubles, and IDs are listed as provided.</p>
+   <ol class="setlist">{video.setlist.map(track=><li>{track}</li>)}</ol>
+  </section>}
+  {video.kind==='DJ set'&&!video.setlist&&<section class="video-notes" aria-labelledby="setlist-heading"><h2 id="setlist-heading">THE SET LIST</h2><p class="notes-intro">A full tracklist for this set is not available yet.</p></section>}
+  {video.transcript&&<details class="transcript">
+   <summary>READ THE SPOKEN TRANSCRIPT <span aria-hidden="true">＋</span></summary>
+   <p class="notes-intro">Spoken sections from YouTube’s automatic English captions; music and lyric passages are omitted. Captions may contain errors. Select a timestamp to open that moment on YouTube.</p>
+   <ol class="transcript-segments">{video.transcript.map(segment=><li><a href={`${youtubeUrl(video)}&t=${segment.start}s`} target="_blank" rel="noopener noreferrer" aria-label={`${timestamp(segment.start)} — open this moment on YouTube`}>{timestamp(segment.start)}</a><p>{segment.text}</p></li>)}</ol>
+  </details>}
+  <a class="text-link more-videos" href="/videos/">EXPLORE ALL VIDEOS ↗</a>
+ </article>
+</Base>
+<style>
+ .watch-page{max-width:1100px;padding-top:40px}.watch-heading{max-width:900px;margin-bottom:28px}.watch-heading h1{font-size:clamp(30px,5vw,60px);line-height:1.1;letter-spacing:-.045em;overflow-wrap:anywhere}.watch-heading .eyebrow{margin-bottom:16px}
+ .video-player{aspect-ratio:16/9;border:1px solid #465970;background:#000;box-shadow:0 20px 80px #16397525}.video-player iframe{display:block;width:100%;height:100%;border:0}
+ .watch-facts{display:flex;gap:22px;flex-wrap:wrap;padding:19px 0;border-bottom:1px solid #334359;font:10px monospace;letter-spacing:.05em;color:#afc5da}.watch-facts a{margin-left:auto;color:#9fe8ff}
+ .watch-description{max-width:70ch;margin-top:24px;font-size:16px;color:#c1d0e1}.video-notes{margin-top:55px}.video-notes h2{font-size:clamp(25px,3.2vw,38px);letter-spacing:-.035em}.notes-intro{margin:15px 0 24px;font-size:13px;line-height:1.8;color:#b7c8da}
+ .setlist{padding:0 0 0 2.5em;font-size:14px;line-height:1.7;overflow-wrap:anywhere}.setlist li{padding:12px 10px;border-bottom:1px solid #26364a}.setlist li::marker{color:#9fe8ff;font:11px monospace}
+ .transcript{margin-top:45px;border-top:1px solid #465970;border-bottom:1px solid #465970}.transcript summary{display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;padding:22px 0;list-style:none;font:12px monospace;letter-spacing:.07em;color:#d8eeff}.transcript summary::-webkit-details-marker{display:none}.transcript summary span{font-size:22px;color:#9fe8ff}.transcript[open] summary span{transform:rotate(45deg)}.transcript .notes-intro{margin-top:0}
+ .transcript-segments{list-style:none;padding:0;margin-bottom:24px}.transcript-segments li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:18px;padding:12px 0;border-top:1px solid #26364a}.transcript-segments a{font:12px monospace;color:#9fe8ff;min-height:28px;display:flex;align-items:flex-start;padding-top:4px}.transcript-segments p{font-size:14px;line-height:1.8;overflow-wrap:anywhere}.more-videos{display:inline-block;margin-top:40px}
+ @media(max-width:700px){.watch-page{padding-top:28px}.watch-facts{gap:15px}.watch-facts a{margin-left:0;flex-basis:100%}.watch-description{font-size:14px}.video-notes{margin-top:38px}.setlist{font-size:13px}.transcript-segments li{gap:10px}.transcript summary{font-size:11px}}
+</style>

@@ -232,6 +232,38 @@ export const songs: Song[] = [
       {
         "platform": "SoundCloud",
         "url": "https://soundcloud.com/sry4u/chromvtik-f33ling-1"
+      },
+      {
+        "platform": "Apple Music",
+        "url": "https://music.apple.com/us/song/chromvtik-f33ling/1890195109"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/watch?v=t22mu5-e6KM"
+      },
+      {
+        "platform": "YouTube Music",
+        "url": "https://music.youtube.com/watch?v=t22mu5-e6KM"
+      },
+      {
+        "platform": "Deezer",
+        "url": "https://www.deezer.com/track/3938353061"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0GVT8NMTP?trackAsin=B0GVTGKY5V"
+      },
+      {
+        "platform": "Tidal",
+        "url": "https://listen.tidal.com/track/512560281"
+      },
+      {
+        "platform": "Pandora",
+        "url": "https://www.pandora.com/TR:200340725"
+      },
+      {
+        "platform": "Yandex Music",
+        "url": "https://music.yandex.ru/track/150165193"
       }
     ],
     "freeDownload": "https://hypeddit.com/sry4u/chromvtikf33ling-1"
@@ -293,6 +325,10 @@ export const songs: Song[] = [
       {
         "platform": "SoundCloud",
         "url": "https://soundcloud.com/sry4u/smokedmybrainaway"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0GN8NQTCR?trackAsin=B0GN94SLCW"
       }
     ],
     "freeDownload": "https://hypeddit.com/sry4u/smokedmybrainaway-1"
@@ -339,6 +375,26 @@ export const songs: Song[] = [
       {
         "platform": "SoundCloud",
         "url": "https://soundcloud.com/kindlymusic/k-ndly-sry4u-slayer"
+      },
+      {
+        "platform": "Apple Music",
+        "url": "https://music.apple.com/us/song/slayer/1855914698"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/watch?v=wFaD3plBq6E"
+      },
+      {
+        "platform": "YouTube Music",
+        "url": "https://music.youtube.com/watch?v=wFaD3plBq6E"
+      },
+      {
+        "platform": "Deezer",
+        "url": "https://www.deezer.com/track/3677834882"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0G3Y5WX5V?trackAsin=B0G3Y5ZDXD"
       }
     ],
     "freeDownload": "https://hypeddit.com/kndlysry4u/slayer"
@@ -361,6 +417,30 @@ export const songs: Song[] = [
       {
         "platform": "SoundCloud",
         "url": "https://soundcloud.com/sry4u/84abd9c6-aff4-49ed-8b42-19858983b9fa"
+      },
+      {
+        "platform": "Apple Music",
+        "url": "https://music.apple.com/us/song/marked-4-death/1845666622"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/watch?v=iXCUlg-_SkI"
+      },
+      {
+        "platform": "YouTube Music",
+        "url": "https://music.youtube.com/watch?v=iXCUlg-_SkI"
+      },
+      {
+        "platform": "Deezer",
+        "url": "https://www.deezer.com/track/3598486362"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0FVVNDJ2D?trackAsin=B0FVVPH8VW"
+      },
+      {
+        "platform": "Pandora",
+        "url": "https://www.pandora.com/TR:176193939"
       }
     ],
     "freeDownload": "https://hypeddit.com/sry4u/marked4death"
@@ -383,6 +463,34 @@ export const songs: Song[] = [
       {
         "platform": "SoundCloud",
         "url": "https://soundcloud.com/sry4u/face-of-rot-final-vwav"
+      },
+      {
+        "platform": "Apple Music",
+        "url": "https://music.apple.com/us/song/face-of-rot/1838118152"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/watch?v=c8FgVLU2_sA"
+      },
+      {
+        "platform": "YouTube Music",
+        "url": "https://music.youtube.com/watch?v=c8FgVLU2_sA"
+      },
+      {
+        "platform": "Deezer",
+        "url": "https://www.deezer.com/track/3543920151"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0FQ2LQ5WH?trackAsin=B0FQ2MTJKJ"
+      },
+      {
+        "platform": "Tidal",
+        "url": "https://listen.tidal.com/track/458968382"
+      },
+      {
+        "platform": "Pandora",
+        "url": "https://www.pandora.com/TR:171280471"
       }
     ],
     "freeDownload": "https://hypeddit.com/sry4u/faceofrot"
@@ -409,6 +517,34 @@ export const songs: Song[] = [
       {
         "platform": "SoundCloud",
         "url": "https://soundcloud.com/sry4u/ramshack"
+      },
+      {
+        "platform": "Apple Music",
+        "url": "https://music.apple.com/us/song/ramshack/1830397010"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/watch?v=DspCuHPvWic"
+      },
+      {
+        "platform": "YouTube Music",
+        "url": "https://music.youtube.com/watch?v=DspCuHPvWic"
+      },
+      {
+        "platform": "Deezer",
+        "url": "https://www.deezer.com/track/3487246161"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0FKSPWBDP?trackAsin=B0FKT8C2Q7"
+      },
+      {
+        "platform": "Tidal",
+        "url": "https://listen.tidal.com/track/451527515"
+      },
+      {
+        "platform": "Pandora",
+        "url": "https://www.pandora.com/TR:168139678"
       }
     ],
     "freeDownload": "https://hypeddit.com/sry4uxe4rc/sry4uxe4rcramshack"
@@ -422,6 +558,38 @@ export const songs: Song[] = [
       {
         "platform": "Spotify",
         "url": "https://open.spotify.com/track/458bLGeZV6kwmoumXr5YXL"
+      },
+      {
+        "platform": "Apple Music",
+        "url": "https://music.apple.com/us/song/scum/1803072795"
+      },
+      {
+        "platform": "YouTube",
+        "url": "https://www.youtube.com/watch?v=aHFYtXaCqSk"
+      },
+      {
+        "platform": "YouTube Music",
+        "url": "https://music.youtube.com/watch?v=aHFYtXaCqSk"
+      },
+      {
+        "platform": "Deezer",
+        "url": "https://www.deezer.com/track/3267428481"
+      },
+      {
+        "platform": "Amazon Music",
+        "url": "https://music.amazon.com/albums/B0DZNZV5BX?trackAsin=B0DZP12RKJ"
+      },
+      {
+        "platform": "Tidal",
+        "url": "https://listen.tidal.com/track/422448065"
+      },
+      {
+        "platform": "Pandora",
+        "url": "https://www.pandora.com/TR:153256343"
+      },
+      {
+        "platform": "Anghami",
+        "url": "https://play.anghami.com/song/1202829153?refer=linktree"
       }
     ],
     "releaseDate": "2025-04-02",

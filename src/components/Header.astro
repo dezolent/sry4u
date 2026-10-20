@@ -2,7 +2,7 @@
 import SourceImage from './SourceImage.astro';
 import {canonicalPagePath} from '../lib/routing';
 import {site} from '../data/site';import Socials from './Socials.astro';
-const path=canonicalPagePath(Astro.url.pathname);const links=[['Home','/'],['Music','/music/'],['EPK','/epk/']];
+const path=canonicalPagePath(Astro.url.pathname);const links=[['Home','/'],['Music','/music/'],['Videos','/videos/'],['EPK','/epk/']];
 ---
 <header class="site-header">
  <nav class="desktop-nav" aria-label="Main navigation">{links.map(([name,url])=><a href={url} aria-current={(url==='/'?path==='/':path.startsWith(url))?'page':undefined}>{name}</a>)}</nav>

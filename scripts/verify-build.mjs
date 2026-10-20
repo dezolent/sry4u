@@ -26,9 +26,24 @@ async function verifyPage(route,title){
  return html;
 }
 await verifyPage('/','SRY4U');await verifyPage('/music/','Music');await verifyPage('/epk/','Electronic Press Kit');
+const collectionHtml=await verifyPage('/videos/','Videos');
+const parseGraph=html=>JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+const collection=parseGraph(collectionHtml).find(node=>node['@type']==='CollectionPage');
+assert.equal(collection.mainEntity.numberOfItems,4);
+assert.ok(headers.includes('frame-src https://www.youtube-nocookie.com;'),'YouTube embeds allowed by production CSP');
+for(const entry of collection.mainEntity.itemListElement){
+ const route=new URL(entry.url).pathname;const html=await verifyPage(route,'SRY4U');const graph=parseGraph(html);
+ const video=graph.find(node=>node['@type']==='VideoObject');
+ assert.equal(graph.filter(node=>node['@id']===entry.url+'#page').length,1);
+ assert.equal(graph.find(node=>node['@id']===entry.url+'#page').mainEntity['@id'],video['@id']);
+ assert.ok(html.includes(`src="${video.embedUrl}"`));
+ assert.ok(video.name&&video.description&&video.uploadDate&&video.duration);
+ await fs.access(path.join(root,new URL(video.thumbnailUrl).pathname));
+ await fs.access(path.join(root,route.replace(/\/$/,'.md')));
+}
 for(const song of songs){const html=await verifyPage(`/music/${song.id}/`,'SRY4U');assert.ok(html.includes(song.title.replace(/&/g,'&amp;'))||html.includes(song.title));const md=await fs.readFile(`${root}/music/${song.id}.md`,'utf8');assert.ok(md.includes(song.title));for(const link of song.streamingLinks||[])assert.ok(md.includes(link.url));}
 for(const album of albums){await verifyPage(`/music/albums/${album.id}/`,'SRY4U');await fs.access(`${root}/music/albums/${album.id}.md`);for(const id of album.songIds)assert.ok(songs.some(s=>s.id===id));}
-for(const name of ['index.md','music.md','epk.md','robots.txt','llms.txt','404.html'])await fs.access(`${root}/${name}`);
+for(const name of ['index.md','music.md','videos.md','epk.md','robots.txt','llms.txt','404.html'])await fs.access(`${root}/${name}`);
 assert.ok(!(await fs.readFile(`${root}/404.html`,'utf8')).includes('name="robots" content="index'));
 verifySharingImage(await fs.readFile(`${root}/404.html`,'utf8'),'/404/');
 assert.ok(!sitemap.includes('404'));assert.ok(!sitemap.includes('/api/'));assert.ok(!sitemap.includes('.md'));

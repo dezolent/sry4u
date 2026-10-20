@@ -56,7 +56,7 @@ test('analytics only loads after consent and queues valid gtag commands',async({
 
 test('navigation and the full catalog remain usable without JavaScript',async({browser})=>{
  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();
- await page.goto('http://127.0.0.1:4321/music/');await expect(page.locator('.release-card')).toHaveCount(catalogSongs.length+albums.length);
+ await page.goto('http://localhost:4321/music/');await expect(page.locator('.release-card')).toHaveCount(catalogSongs.length+albums.length);
  await page.locator('.mobile-menu summary').click();await page.locator('.mobile-menu').getByRole('link',{name:'EPK',exact:true}).click();
  await expect(page.getByRole('link',{name:/Download EPK/})).toBeVisible();await context.close();
 });

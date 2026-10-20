@@ -11,6 +11,7 @@ const sources=import.meta.glob<ImageMetadata>([
  '../../public/images/gallery/*.{png,jpg}',
  '../../public/images/branding-inspo/*.{png,jpg}',
  '../../public/images/covers/*.{png,jpg,jpeg,webp,avif}',
+ '../../public/images/video-thumbnails/*.jpg',
  '../../public/images/platforms/*.webp',
  '../../public/images/social/*.webp',
 ],{eager:true,import:'default'});

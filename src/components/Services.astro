@@ -3,5 +3,11 @@ import SourceImage from './SourceImage.astro';
 import type {StreamingLink} from '../data/types';import {PLATFORM_LOGOS} from '../data/platform';import {safePublicUrl} from '../lib/events';
 interface Props {links?:StreamingLink[];}
 const {links=[]}=Astro.props;
+// Preserve brand artwork while giving black-lettered wordmarks a light backing.
+// Spotify and SoundCloud already work directly on the dark card.
+const needsLightWordmark=(platform:string)=>!['Spotify','SoundCloud'].includes(platform);
 ---
-<div class="service-list">{links.filter(link=>safePublicUrl(link.url)).map(link=><a class="service-link" href={safePublicUrl(link.url)} target="_blank" rel="noopener noreferrer" aria-label={`Listen on ${link.platform} (opens in a new tab)`} data-track="streaming_open">{PLATFORM_LOGOS[link.platform]?<SourceImage src={PLATFORM_LOGOS[link.platform].src} alt={PLATFORM_LOGOS[link.platform].alt} width="180" loading="lazy"/>:<span class="service-name">{link.platform}</span>}<span class="service-label">Listen <span aria-hidden="true">↗</span></span></a>)}</div>
+<div class="service-list">{links.filter(link=>safePublicUrl(link.url)).map(link=><a class="service-link" href={safePublicUrl(link.url)} target="_blank" rel="noopener noreferrer" aria-label={`Listen on ${link.platform} (opens in a new tab)`} data-track="streaming_open">{PLATFORM_LOGOS[link.platform]?<SourceImage class={needsLightWordmark(link.platform)?'service-wordmark-light':undefined} src={PLATFORM_LOGOS[link.platform].src} alt={PLATFORM_LOGOS[link.platform].alt} width="180" loading="lazy"/>:<span class="service-name">{link.platform}</span>}<span class="service-label">Listen <span aria-hidden="true">↗</span></span></a>)}</div>
+<style>
+ .service-list :global(.service-wordmark-light){background:#e8eef7;padding:6px 10px;box-sizing:content-box;border-radius:3px}
+</style>
