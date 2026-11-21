@@ -52,6 +52,6 @@ export const socialLinks: SocialLink[] = [
 export const bio = "Welcome To the Atonement.";
 
 export const contactEmail = "julian@sry4u.com";
-export const bookingEmail = "bookings@sry4u.com";
+export const bookingEmail = "sry4u@visionartists.co";
 export const contactPhone = "+1 (858) 358-4734";
 export const webEmail = "artists@bounced.studio";
