@@ -25,10 +25,15 @@ test('gallery supports next, Escape and restores focus',async({page})=>{
  await page.getByRole('button',{name:'Next photo'}).click();await expect(page.locator('#lightbox-caption')).toContainText('2 / 8');
  await page.keyboard.press('Escape');await expect(page.locator('#gallery-dialog')).not.toBeVisible();await expect(opener).toBeFocused();
 });
-test('fanlink exposes the supplied streaming service and downloadable EPK works',async({page,request})=>{
+test('fanlink exposes the supplied streaming service and EPK opens in a new tab',async({page,request})=>{
  await page.goto('/music/chromvtik-f33ling/');await expect(page.getByRole('heading',{level:1})).toContainText('CHROMVTIK F33LING');
  await expect(page.getByRole('link',{name:/Listen on Spotify/})).toHaveAttribute('href','https://open.spotify.com/track/6CY9JbAyJihDduAkBiFJBk');
- await page.goto('/epk/');await expect(page.getByRole('link',{name:/Download EPK/})).toHaveAttribute('download',/SRY4U/);
+ await page.goto('/epk/');const pdfLinks=page.locator('a[href="/docs/SRY4U_EPK_2026_v5.pdf"]');
+ await expect(pdfLinks).toHaveCount(2);
+ for(const link of await pdfLinks.all()){
+  await expect(link).toHaveAttribute('target','_blank');await expect(link).toHaveAttribute('rel','noopener noreferrer');
+  await expect(link).not.toHaveAttribute('download');
+ }
  expect((await request.get('/docs/SRY4U_EPK_2026_v5.pdf')).ok()).toBeTruthy();
 });
 test('hero can pause motion and key pages have no serious accessibility findings',async({page})=>{
@@ -58,5 +63,5 @@ test('navigation and the full catalog remain usable without JavaScript',async({b
  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});const page=await context.newPage();
  await page.goto('http://localhost:4321/music/');await expect(page.locator('.release-card')).toHaveCount(catalogSongs.length+albums.length);
  await page.locator('.mobile-menu summary').click();await page.locator('.mobile-menu').getByRole('link',{name:'EPK',exact:true}).click();
- await expect(page.getByRole('link',{name:/Download EPK/})).toBeVisible();await context.close();
+ await expect(page.getByRole('link',{name:/Open EPK/})).toBeVisible();await context.close();
 });
